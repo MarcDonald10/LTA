@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+/*
+ * LTA le mag : tokens du design system (mini charte graphique, oct. 2026).
+ * Angles droits partout : n'utiliser aucune classe rounded-*.
+ */
+@theme {
+  --color-violet: #2f2440; /* texte principal, en-tête, pied de page */
+  --color-bordeaux: #bf2a70; /* accent : boutons, étiquettes, liens au survol */
+  --color-bordeaux-fonce: #a62957; /* survol des boutons (6,8:1 sur blanc) */
+  --color-mauve: #a66f93; /* filets, icônes, jamais de texte sur fond clair */
+  --color-creme: #f5d49a; /* encadrés, citations, fonds d'accentuation */
+  --color-blanc: #ffffff;
+
+  /* Akira Expanded : ajouter le fichier sous licence dans app/fonts (voir README). */
+  --font-display: "Akira Expanded", Arial, sans-serif;
+  --font-sans: var(--font-roboto), Arial, sans-serif;
+
+  --container-page: 75rem; /* 1 200 px */
+  --container-read: 45rem; /* 720 px */
+}
+
+@layer base {
+  html {
+    color: var(--color-violet);
+    background: var(--color-blanc);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem; /* 17 px */
+    line-height: 1.75rem;
+  }
+
+  @media (min-width: 64rem) {
+    body {
+      font-size: 1.125rem; /* 18 px */
+      line-height: 1.875rem;
+    }
+  }
+
+  ::selection {
+    background: var(--color-creme);
+    color: var(--color-violet);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-bordeaux);
+    outline-offset: 2px;
+  }
+
+  .on-dark :focus-visible {
+    outline-color: var(--color-creme);
+  }
+}
+
+@layer components {
+  /* Échelle typographique de la charte (mobile, puis ordinateur dès 1 024 px) */
+  .type-h1,
+  .type-h2,
+  .type-card-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    overflow-wrap: break-word;
+  }
+  .type-h1 {
+    font-size: 1.375rem;
+    line-height: 1.75rem;
+  }
+  .type-h2 {
+    font-size: 1.0625rem;
+    line-height: 1.5rem;
+  }
+  .type-card-title {
+    font-size: 1rem;
+    line-height: 1.375rem;
+  }
+  .type-h3 {
+    font-weight: 700;
+    font-size: 1.1875rem;
+    line-height: 1.625rem;
+  }
+  .type-chapo {
+    font-weight: 500;
+    font-size: 1.1875rem;
+    line-height: 1.75rem;
+  }
+  .type-caption {
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+  }
+  .type-label {
+    font-weight: 700;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 64rem) {
+    .type-h1 {
+      font-size: 2.125rem;
+      line-height: 2.625rem;
+    }
+    .type-h2 {
+      font-size: 1.375rem;
+      line-height: 1.875rem;
+    }
+    .type-card-title {
+      font-size: 1.125rem;
+      line-height: 1.5rem;
+    }
+    .type-h3 {
+      font-size: 1.375rem;
+      line-height: 1.875rem;
+    }
+    .type-chapo {
+      font-size: 1.3125rem;
+      line-height: 2rem;
+    }
+    .type-caption {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+  }
+
+  /* Filet de 2 px violet au-dessus des grands titres */
+  .rule-top {
+    border-top: 2px solid var(--color-violet);
+    padding-top: 1rem;
+  }
+
+  /* Liens dans le texte : violet souligné, bordeaux au survol */
+  .link {
+    color: var(--color-violet);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
+  .link:hover {
+    color: var(--color-bordeaux);
+  }
+
+  /* Corps d'article : 60 à 75 caractères par ligne, jamais justifié */
+  .article-body > * + * {
+    margin-top: 1.5rem;
+  }
+  .article-body > h2 {
+    margin-top: 3rem;
+  }
+  .article-body > h3 {
+    margin-top: 2rem;
+  }
+  .article-body a {
+    color: var(--color-violet);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .article-body a:hover {
+    color: var(--color-bordeaux);
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
